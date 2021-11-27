@@ -1634,6 +1634,8 @@ MonoBehaviour:
   IPInput: {fileID: 1090801212}
   NameInput: {fileID: 2139111850}
   MessageInput: {fileID: 1328274344}
+  ConnectButton: {fileID: 1410974749}
+  SendButton: {fileID: 781090057}
 --- !u!1 &1711791399
 GameObject:
   m_ObjectHideFlags: 0
