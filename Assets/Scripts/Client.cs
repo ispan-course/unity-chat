@@ -23,6 +23,7 @@ public class Client : MonoBehaviour
         MessageInput.interactable = false;
         SendButton.interactable = false;
         m_client = new ChatClient();
+        m_client.OnReceiveMessage += OnReceiveMessage;
     }
 
     // Update is called once per frame
@@ -31,13 +32,12 @@ public class Client : MonoBehaviour
         if (m_isConnected)
         {
             m_client.Refresh();
-            
-            var messages = m_client.GetMessages();
-            foreach (var message in messages)
-            {
-                Debug.Log(message.Key + ": " + message.Value);
-            }
         }
+    }
+
+    void OnReceiveMessage(object sender, MessageCommand command)
+    {
+        Debug.Log(command.m_UserName + ": " + command.m_Message);
     }
 
     public void OnConnectClick()
@@ -57,12 +57,12 @@ public class Client : MonoBehaviour
             return;
         }
 
+        m_client.SetName(NameInput.text);
         m_isConnected = m_client.Connect(IPInput.text, 4099);
 
         if (m_isConnected)
         {
             ConnectButton.interactable = false;
-            m_client.SetName(NameInput.text);
 
             MessageInput.interactable = true;
             SendButton.interactable = true;
