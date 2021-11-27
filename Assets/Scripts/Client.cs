@@ -28,6 +28,16 @@ public class Client : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_isConnected)
+        {
+            m_client.Refresh();
+            
+            var messages = m_client.GetMessages();
+            foreach (var message in messages)
+            {
+                Debug.Log(message.Key + ": " + message.Value);
+            }
+        }
     }
 
     public void OnConnectClick()
